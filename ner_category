@@ -1,0 +1,15 @@
+	개체명 범주	태그	정의
+1	PERSON	PER	실존, 가상 등 인물명에 해당 하는 것
+2	FIELD	FLD	학문 분야 및 이론, 법칙, 기술 등
+3	ARTIFACTS_WORKS	AFW	인공물로 사람에 의해 창조된 대상물
+4	ORGANIZATION	ORG	기관 및 단체와 회의/회담을 모두 포함
+5	LOCATION	LOC	지역명칭과 행정구역 명칭 등
+6	CIVILIZATION	CVL	문명 및 문화에 관련된 용어
+7	DATE	DAT	날짜
+8	TIME	TIM	시간
+9	NUMBER	NUM	숫자
+10	EVENT	EVT	특정 사건 및 사고 명칭과 행사 등
+11	ANIMAL	ANM	동물
+12	PLANT	PLT	식물
+13	MATERIAL	MAT	금속, 암석, 화학물질 등
+14	TERM	TRM	의학 용어, IT곤련 용어 등 일반 용어를 총칭

@@ -1,0 +1,1 @@
+{"encoder_seq_length": 95, "decoder_seq_length": 43, "embedding_dim": 512, "units": 1024}

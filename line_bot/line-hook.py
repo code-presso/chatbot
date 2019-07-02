@@ -14,6 +14,8 @@ from linebot.models import (
 
 import requests
 import argparse
+import numpy as np
+
 import ner_infer
 import intent_infer
 
@@ -22,6 +24,9 @@ app = Flask(__name__)
 
 NER_MODEL = None
 INTENT_MODEL = None
+INTENT_NUM_SEQ = 0
+INTENT_INPUT_TOKEN = {}
+
 FLAGS = None
 ENTITIES = ['CVL_B', 'AFW_B']
 
@@ -85,8 +90,9 @@ def infer_intent(msg):
     # Infer Intent here
     print(msg)
 
-    sentence = intent_infer.preprocess_sentence(msg)
-    intent_id = INTENT_MODEL.predict(sentence)
+    sentence = intent_infer.preprocess_sentence(msg, INTENT_NUM_SEQ, INTENT_INPUT_TOKEN)
+    predictions = INTENT_MODEL.predict(sentence)
+    intent_id = np.argmax(predictions, 1)[0]
 
     print(intent_id)
 
@@ -140,11 +146,10 @@ if __name__ == "__main__":
 
     FLAGS, umparsed = parser.parse_known_args()
 
+    INTENT_MODEL, INTENT_NUM_SEQ, INTENT_INPUT_TOKEN = intent_infer.model_load(checkpoint_file=FLAGS.intent_checkpoint_file)
     NER_MODEL = ner_infer.Ner(checkpoint_dir=FLAGS.ner_checkpoint_path)
-    INTENT_MODEL = intent_infer.model_load(checkpoint_file=FLAGS.intent_checkpoint_file)
 
-
+    # print(infer_intent("하이~"))
     # print(infer_ner("노란색 티셔츠를 주문해줘"))
-    # print(infer_intent("안녕하세요"))
 
     app.run()

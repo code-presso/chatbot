@@ -38,7 +38,7 @@ def main(_):
     optimizer = RMSprop(lr=1e-4)
 
     model.compile(optimizer=optimizer,
-                  loss='binary_crossentropy',
+                  loss='categorical_crossentropy',
                   metrics=['acc'])
 
     model.fit(train_data, train_labels,

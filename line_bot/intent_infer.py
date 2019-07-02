@@ -6,10 +6,6 @@ import numpy as np
 from tensorflow.keras import models
 
 
-NUM_SEQUENCE = None
-INPUT_TOKEN_INDEX = None
-
-
 def model_load(checkpoint_file):
 
     model = models.load_model(checkpoint_file)
@@ -17,20 +13,20 @@ def model_load(checkpoint_file):
     # 입력데이터 전처리에 필요한 속성 정보
     json_data = open('./intent/model_parameter.json').read()
     model_parameter = json.loads(json_data)
-    NUM_SEQUENCE = int(model_parameter['num_sequence'])
+    num_sequence = int(model_parameter['num_sequence'])
     json_data = open('./intent/input_token_index.json').read()
-    INPUT_TOKEN_INDEX = json.loads(json_data)
+    input_token_index = json.loads(json_data)
 
-    print('intent_modle_loaed')
+    print('intent modle loaed')
 
-    return model
+    return model, num_sequence, input_token_index
 
-def preprocess_sentence(sentence):
+def preprocess_sentence(sentence, num_sequence, input_token_index):
 
-    input_data = np.zeros((1, NUM_SEQUENCE), dtype='float32')
+    input_data = np.zeros((1, num_sequence), dtype='float32')
 
     for t, char in enumerate(sentence):
-        if t < NUM_SEQUENCE:
-            input_data[0, t] = INPUT_TOKEN_INDEX[char]
+        if t < num_sequence:
+            input_data[0, t] = input_token_index[char]
 
-    return np.argmax(input_data, 0)
+    return input_data

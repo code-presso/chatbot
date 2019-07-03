@@ -31,8 +31,8 @@ FLAGS = None
 ENTITIES = ['CVL_B', 'AFW_B']
 
 # 라인 봇 api 정보 입력
-line_bot_api = LineBotApi('')
-handler = WebhookHandler('')
+line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
+handler = WebhookHandler('YOUR_CHANNEL_SECRET')
 
 
 @app.route("/callback", methods=['POST'])
